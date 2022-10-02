@@ -93,12 +93,16 @@ async function main() {
     return acc;
   }, 0);
 
+  const total_eleitores = document.createElement("h3")
+  total_eleitores.innerText = `TOTAL ELEITORES: ${formatNumString(result.e)}`
+
   const total_votes = document.createElement("h3");
   total_votes.innerText = `TOTAL VOTOS: ${formatNumString(vote_sum)}`
 
   const refresh_warning = document.createElement("h4")
   refresh_warning.innerText = `atualiza a cada ${REFRESH_INTERVAL / 1000} segundos`
 
+  root.appendChild(total_eleitores)
   root.appendChild(total_votes)
   root.appendChild(refresh_warning)
   root.appendChild(table);
