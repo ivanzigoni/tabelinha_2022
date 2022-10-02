@@ -5,6 +5,9 @@ function images(name) {
     "22": "./assets/bozo.jpeg",
     "21": "./assets/manzano.jpg",
     "14": "./assets/padre.jpeg",
+    "30": "./assets/davila.jpeg",
+    "27": "./assets/eymael.jpeg",
+
   }
 
   return map[name] ? map[name] : "";
@@ -36,6 +39,9 @@ async function main() {
 
   const columns = document.createElement("tr");
 
+  const column_img = document.createElement("th");
+  column_img.innerText = "";
+
   const column_name = document.createElement("th");
   column_name.innerText = "NOME";
 
@@ -45,6 +51,7 @@ async function main() {
   const column_percentage = document.createElement("th");
   column_percentage.innerText = "PORCENTAGEM";
 
+  columns.appendChild(column_img);
   columns.appendChild(column_name);
   columns.appendChild(column_qtd_votos);
   columns.appendChild(column_percentage);
@@ -65,6 +72,7 @@ async function main() {
     const img = document.createElement("img")
     img.src = images(String(n))
     img.style.height = "50px"
+    img.style.width = "70px";
 
     const td_vap = document.createElement("td");
     td_vap.innerText = formatNumString(vap); 
@@ -72,8 +80,8 @@ async function main() {
     const td_pvap = document.createElement("td");
     td_pvap.innerText = `${pvap}%`;
 
+    tr.appendChild(img);
     tr.appendChild(td_name);
-    td_name.appendChild(img);
     tr.appendChild(td_vap);
     tr.appendChild(td_pvap);
 
