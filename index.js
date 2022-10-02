@@ -1,3 +1,5 @@
+const REFRESH_INTERVAL = 25000;
+
 function images(name) {
   const map = {
     "12": "./assets/ciro.jpeg",
@@ -92,7 +94,11 @@ async function main() {
   const total_votes = document.createElement("h3");
   total_votes.innerText = `TOTAL VOTOS: ${formatNumString(vote_sum)}`
 
+  const refresh_warning = document.createElement("h4")
+  refresh_warning.innerText = `atualiza a cada ${REFRESH_INTERVAL / 1000} segundos`
+
   root.appendChild(total_votes)
+  root.appendChild(refresh_warning)
   root.appendChild(table);
 }
 
@@ -100,4 +106,4 @@ main();
 
 setInterval(() => {
   main();
-}, 25000);
+}, REFRESH_INTERVAL);
