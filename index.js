@@ -7,10 +7,8 @@ function images(name) {
     "14": "./assets/padre.jpeg",
     "30": "./assets/davila.jpeg",
     "27": "./assets/eymael.jpeg",
-
   }
-
-  return map[name] ? map[name] : "";
+  return map[name] ? map[name] : "./assets/default.jpeg";
 }
 
 function formatNumString(num) {
