@@ -39,9 +39,6 @@ async function main() {
 
   const columns = document.createElement("tr");
 
-  const column_img = document.createElement("th");
-  column_img.innerText = "";
-
   const column_name = document.createElement("th");
   column_name.innerText = "NOME";
 
@@ -51,7 +48,6 @@ async function main() {
   const column_percentage = document.createElement("th");
   column_percentage.innerText = "PORCENTAGEM";
 
-  columns.appendChild(column_img);
   columns.appendChild(column_name);
   columns.appendChild(column_qtd_votos);
   columns.appendChild(column_percentage);
@@ -65,14 +61,19 @@ async function main() {
     tr.style.textAlign = "center"
     tr.style.fontSize = "120%"
 
+    const avatar_div = document.createElement("div")
+    avatar_div.style.display = "flex";
+    avatar_div.style.flexDirection = "column";
+    avatar_div.style.alignItems = "center";
+
     const td_name = document.createElement("td")
     const nameText = nm.split(" ")[nm.split(" ").length - 1]
     td_name.innerText = `${n === "30" ? "D'ÁVILA" : nameText} ${n}`;
 
     const img = document.createElement("img")
     img.src = images(String(n))
-    img.style.height = "50px"
-    img.style.width = "70px";
+    img.style.height = "40px"
+    img.style.width = "80px";
 
     const td_vap = document.createElement("td");
     td_vap.innerText = formatNumString(vap); 
@@ -80,8 +81,9 @@ async function main() {
     const td_pvap = document.createElement("td");
     td_pvap.innerText = `${pvap}%`;
 
-    tr.appendChild(img);
-    tr.appendChild(td_name);
+    avatar_div.appendChild(img);
+    avatar_div.appendChild(td_name);
+    tr.appendChild(avatar_div);
     tr.appendChild(td_vap);
     tr.appendChild(td_pvap);
 
