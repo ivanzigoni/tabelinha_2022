@@ -1,9 +1,14 @@
+function formatNumString(num) {
+  return String(num).replace(/(.)(?=(\d{3})+$)/g,'$1.');
+}
 
 async function main() {
   const root = document.querySelector('.root');
   let result = [];
 
-  if (root.firstChild) root.removeChild(root.firstChild);  
+  if (root.firstChild) {
+    while (root.firstChild) root.removeChild(root.firstChild);
+  } 
 
   try {
     const request = await fetch("https://resultados.tse.jus.br/oficial/ele2022/544/dados-simplificados/br/br-c0001-e000544-r.json");
@@ -34,8 +39,8 @@ async function main() {
 
   table.appendChild(columns);
 
-  for (let i = 0; i < result.cand.length; i += 1) {
-    const { vap, pvap, nm, n } = result.cand[i];
+  const vote_sum = result.cand.reduce((acc, cand) => {
+    const { vap, pvap, nm, n } = cand;
 
     const tr = document.createElement("tr");
     tr.style.textAlign = "center"
@@ -46,7 +51,7 @@ async function main() {
     td_name.innerText = `${n === "30" ? "D'ÁVILA" : nameText} ${n}`;
 
     const td_vap = document.createElement("td");
-    td_vap.innerText = vap; 
+    td_vap.innerText = formatNumString(vap); 
 
     const td_pvap = document.createElement("td");
     td_pvap.innerText = `${pvap}%`;
@@ -56,14 +61,20 @@ async function main() {
     tr.appendChild(td_pvap);
 
     table.appendChild(tr);
-  }
 
+    acc += +vap;
+    return acc;
+  }, 0);
+
+  const total_votes = document.createElement("h3");
+  total_votes.innerText = `TOTAL VOTOS: ${formatNumString(vote_sum)}`
+
+  root.appendChild(total_votes)
   root.appendChild(table);
-
 }
 
 main();
 
 setInterval(() => {
   main();
-}, 15000);
+}, 25000);
