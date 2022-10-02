@@ -1,3 +1,15 @@
+function images(name) {
+  const map = {
+    "12": "./assets/ciro.jpeg",
+    "13": "./assets/lula.jpg",
+    "22": "./assets/bozo.jpeg",
+    "21": "./assets/manzano.jpg",
+    "14": "./assets/padre.jpeg",
+  }
+
+  return map[name] ? map[name] : "";
+}
+
 function formatNumString(num) {
   return String(num).replace(/(.)(?=(\d{3})+$)/g,'$1.');
 }
@@ -50,6 +62,10 @@ async function main() {
     const nameText = nm.split(" ")[nm.split(" ").length - 1]
     td_name.innerText = `${n === "30" ? "D'ÁVILA" : nameText} ${n}`;
 
+    const img = document.createElement("img")
+    img.src = images(String(n))
+    img.style.height = "50px"
+
     const td_vap = document.createElement("td");
     td_vap.innerText = formatNumString(vap); 
 
@@ -57,6 +73,7 @@ async function main() {
     td_pvap.innerText = `${pvap}%`;
 
     tr.appendChild(td_name);
+    td_name.appendChild(img);
     tr.appendChild(td_vap);
     tr.appendChild(td_pvap);
 
